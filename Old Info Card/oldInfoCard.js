@@ -1,66 +1,75 @@
 const oldInfoCard = {
-     gameTextInterval: null,
-     openOldInfoCard(params, interfaceName) {
-          params = JSON.parse(params);
-          let houseTypes = ["Эконом класс", "Деревенски дом", "Средни класс", "Премиум класс", "Элитны дом", "Эконом класс", "VIP класс", "Квартира"];
-          
-          let type = interfaceName == "Business" ? 1 : 0;
-          let name = type == 0 ? params[1] : params[2];
-          let roomAmount = type == 0 ? params[4] : params[6];
-          let owner = type == 0 ? params[2] : params[3];
-          let price = type == 0 ? params[6] : params[5];
-          let rent = type == 0 ? params[5] : params[4];
-          let paramType = type == 0 ? houseTypes.indexOf(params[3].replace('й', '').replace('й', '').replace('+', '')) : params[1];
-          
-          params = JSON.stringify([type, name, roomAmount, owner, price, rent, paramType]);
-          
-          window.openInterface('InfoCard', params);
-
-          if (name.toLocaleLowerCase().includes('киоск')) setTimeout(() => {
-               interface('InfoCard').$el.children[0].children[0].children[1].children[0].children[1].className = 'text';
-               interface('InfoCard').$el.children[0].children[0].children[1].children[0].children[1].innerHTML = `<span style="color: hsl(336deg 28% 67%)">Свободных полок: ${roomAmount}<span>`;
-               interface('InfoCard').$el.children[0].children[1].children[1].children[0].children[1].innerText = 'Налог на продажу'
-               interface('InfoCard').$el.children[0].children[1].children[1].children[0].children[0].innerText = `${rent} %`;
-          }, 50);
-
-          if (interfaceName == 'Appartament') setTimeout(() => {
-               interface('InfoCard').$el.children[0].children[1].children[0].children[0].innerHTML = `<span style="color:${owner.toLocaleLowerCase() == 'государство' ? 'hsl(120deg 100% 39%)' : 'FFFFFF'}">${owner}</span>`
-               interface('InfoCard').$el.children[0].children[0].children[1].children[0].children[0].innerHTML = `<span style="color:${owner.toLocaleLowerCase() == 'государство' ? 'hsl(120deg 100% 39%)' : 'FFFFFF'}">${name}</span>`
-          }, 50);
-     },
-     hookAndReplaceNewInfoCard() {
-          App.$children[0].$refs['Appartament'] = [{
-               close() {
-                    clearInterval(oldInfoCard.gameTextInterval);
-                    interface('GameText').add(`[3,\"~w~Для взаимодействия нажмите ~g~alt\",500,0,0,0]`)
-                    window.closeInterface('InfoCard');
-               }
-          }];
-
-          App.$children[0].$refs['Business'] = [{
-               close() {
-                    clearInterval(oldInfoCard.gameTextInterval);
-                    interface('GameText').add(`[3,\"~w~Для взаимодействия нажмите ~g~alt\",500,0,0,0]`)
-                    window.closeInterface('InfoCard');
-               }
-          }];
-
-          window.openInterface = new Proxy(window.openInterface, {
-               apply(target, thisArgs, args) {
-
-                    try {
-                         if (args[0] === 'Business' || args[0] === 'Appartament') {
-                              interface('GameText').add(`[3,\"~w~Для взаимодействия нажмите ~g~alt\",3000,0,0,0]`);
-                              oldInfoCard.gameTextInterval = setInterval(() => interface('GameText').add(`[3,\"~w~Для взаимодействия нажмите ~g~alt\",3000,0,0,0]`), 2000)
-                              oldInfoCard.openOldInfoCard(args[1], args[0]);
-                              return 0;
-                         }
-                    } catch (error) { }
-
-                    return Reflect.apply(target, thisArgs, args);
-               }
-          });
-     }
-}
-
+  gameTextInterval: null,
+  isBusinessOpen: false,
+  openOldInfoCard(e, n) {
+    e = JSON.parse(e);
+    let r = n == "Business" ? 1 : 0;
+    let d = r == 0 ? e[1] : e[2];
+    let a = r == 0 ? e[4] : e[6];
+    let i = r == 0 ? e[2] : e[3];
+    let l = r == 0 ? e[6] : e[5];
+    let o = r == 0 ? e[5] : e[4];
+    let t = r == 0 ? ["Эконом класс", "Деревенски дом", "Средни класс", "Премиум класс", "Элитны дом", "Эконом класс", "VIP класс", "Квартира"].indexOf(e[3].replace("й", "").replace("й", "").replace("+", "")) : e[1];
+    e = JSON.stringify([r, d, a, i, l, o, t]);
+    window.openInterface("InfoCard", e);
+    if (d.toLocaleLowerCase().includes("киоск")) {
+      setTimeout(() => {
+        window.interface("InfoCard").$el.children[0].children[0].children[1].children[0].children[1].className = "text";
+        window.interface("InfoCard").$el.children[0].children[0].children[1].children[0].children[1].innerHTML = `<span style="color: hsl(336deg 28% 67%)">Свободных полок: ${a}<span>`;
+        window.interface("InfoCard").$el.children[0].children[1].children[1].children[0].children[1].innerText = "Налог на продажу";
+        window.interface("InfoCard").$el.children[0].children[1].children[1].children[0].children[0].innerText = `${o} %`;
+      }, 50);
+    }
+    if (n == "Appartament") {
+      setTimeout(() => {
+        window.interface("InfoCard").$el.children[0].children[1].children[0].children[0].innerHTML = `<span style="color:${i.toLocaleLowerCase() == "государство" ? "hsl(120deg 100% 39%)" : "FFFFFF"}">${i}</span>`;
+        window.interface("InfoCard").$el.children[0].children[0].children[1].children[0].children[0].innerHTML = `<span style="color:${i.toLocaleLowerCase() == "государство" ? "hsl(120deg 100% 39%)" : "FFFFFF"}">${d}</span>`;
+      }, 50);
+    }
+  },
+  hookAndReplaceNewInfoCard() {
+    window.App.$refs.Appartament = [{
+      close() {
+        clearInterval(oldInfoCard.gameTextInterval);
+        window.interface("GameText").add("[3,\"~w~Для взаимодействия нажмите ~g~alt\",500,0,0,0]");
+        window.closeInterface("InfoCard");
+      }
+    }];
+    window.App.$refs.Business = [{
+      close: () => {
+        clearInterval(oldInfoCard.gameTextInterval);
+        window.interface("GameText").add("[3,\"~w~Для взаимодействия нажмите ~g~alt\",500,0,0,0]");
+        window.closeInterface("InfoCard");
+        this.isBusinessOpen = false;
+      }
+    }];
+    window.openInterface = new Proxy(window.openInterface, {
+      apply: (e, n, r) => {
+        try {
+          if (r[0] === "Business") {
+            this.isBusinessOpen = true;
+          }
+          if (r[0] === "Business" || r[0] === "Appartament") {
+            window.interface("GameText").add("[3,\"~w~Для взаимодействия нажмите ~g~alt\",3000,0,0,0]");
+            oldInfoCard.gameTextInterval = setInterval(() => window.interface("GameText").add("[3,\"~w~Для взаимодействия нажмите ~g~alt\",3000,0,0,0]"), 2000);
+            oldInfoCard.openOldInfoCard(r[1], r[0]);
+            return 0;
+          }
+        } catch (e) {}
+        return Reflect.apply(e, n, r);
+      }
+    });
+    this.onKeyDown();
+    jsLoader.showConnectedScript("info", "oldInfoCard");
+  },
+  onKeyDown() {
+    document.addEventListener("keydown", e => {
+      if (!e.repeat) {
+        if (this.isBusinessOpen && e.keyCode === 18) {
+          window.sendClientEvent(0, "Business_OnPlayerEnter");
+        }
+      }
+    });
+  }
+};
 oldInfoCard.hookAndReplaceNewInfoCard();
