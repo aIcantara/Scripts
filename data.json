@@ -22,8 +22,9 @@
             "html": "text/html",
             "js": "application/javascript",
             "eot": "application/vnd.ms-fontobject",
-            "otf": "application/font-otf",
-            "ttf": "font/truetype"
+            "otf": "font/opentype",
+            "ttf": "font/truetype",
+            "woff2": "font/woff2"
         }
     }
 }
