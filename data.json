@@ -1,0 +1,29 @@
+{
+    "loader-module": {
+        "data": {
+            "my": "8HH3CbeIH6U+eLSU/v41o0XqsYH/hidSUugA9xS4e+QCLHA5d9MxBm5Jn1KK3LvmC2cpcgIWUpKcnYeA8R+f78TFZTaZmXjGWM7BLHg8KUcqYMycfqRIPIy8aLL9Kx2a6pzLe9d860lvDXytMBXjfnJFtijX3I7/78gXdVJr/w38lA4P7KEbVU9EtEyXua5xxgaXn1I14qn1lvFsGT9gWOTXwroYog+p5Gutj29zLEsuXL5p1hug9ugX6SeOZRJGWsnrl+9CaqiPfbr02bb6RO++/FT/NVIpfpgAXIGwfrAehN761tAUUO+5b6w/HF8VON2ee4Pixj59q0bx4PFCG1pudFkt9KCDHX8u/rXOdEE=",
+            "sever": "m4bne1QJ8bGkI73welwLnTu2xnUBTmDh22/FXL98dtKwIzwP7TdIu6yGVZudtSOwlg9/QhIHf2+XbzvtR+HHrk/M07s6DNBRh/6OgyME0iOB8BT2Dn7tXGZLhy9w19ngtoGS6qqDo4hN13auUrnoBwKF6/Q9IdoR6lynjvdcqA0LJ6EeMpDiABKpuQ+S6sDZMv0jcXNbAbux9uwKjX8SWcmzQ+rI/YDVWpEc4QKNQFnyQAda84ZTRc2VklnbSsnroKglKtRNvAzj/hcvZImYdjgcQencR2GN87vijDxuetYxhbLlT6S6HMXbBwCnfc3YBYnlMyMu4zlQs+IDDN+QoDO3+0vFTm8uHgcJ3Ik+OOM="
+        },
+        "contentType": {
+            "aac": "audio/aac",
+            "alac": "audio/alac",
+            "flac": "audio/flac",
+            "mp3": "audio/mpeg",
+            "ogg": "audio/ogg",
+            "wav": "audio/wav",
+            "wma": "audio/x-ms-wma",
+            "gif": "image/gif",
+            "jpeg": "image/jpeg",
+            "jpg": "image/jpeg",
+            "png": "image/png",
+            "svg": "image/svg+xml",
+            "mp4": "video/mp4",
+            "css": "text/css",
+            "html": "text/html",
+            "js": "application/javascript",
+            "eot": "application/vnd.ms-fontobject",
+            "otf": "application/font-otf",
+            "ttf": "font/truetype"
+        }
+    }
+}
